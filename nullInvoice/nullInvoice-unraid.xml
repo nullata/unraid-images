@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>nullInvoice</Name>
+  <Repository>nullata/nullinvoice</Repository>
+  <Registry>https://hub.docker.com/r/nullata/nullinvoice</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/nullata/nullInvoice</Project>
+  <ReadMe/>
+  <Overview>Automated invoice generation with customizable HTML templates for webstores and SaaS integration.&#13;
+&#13;
+For the full documentation of this project, available in six languages, please visit: https://github.com/nullata/nullInvoice/</Overview>
+  <Category>Tools: Other: Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/nullata/nullInvoice/refs/heads/main/nullInvoice/src/main/resources/static/images/logo.svg</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1771289923</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Port" Target="8080" Default="8080" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Sofia" Mode="" Description="Your UTC TZ offset for database timestamp recording. List of available TZs: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">Europe/Sofia</Config>
+  <Config Name="DB_PORT" Target="DB_PORT" Default="3306" Mode="" Description="MariaDB/MySQL database port" Type="Variable" Display="always" Required="true" Mask="false">3306</Config>
+  <Config Name="DB_HOST" Target="DB_HOST" Default="changeme" Mode="" Description="Your MariaDB/MySQL database host or container name" Type="Variable" Display="always" Required="true" Mask="false">changeme</Config>
+  <Config Name="DB_USER" Target="DB_USER" Default="nullinvoice" Mode="" Description="The designated user for this application in the database. For more info on the requirements, please visit: https://github.com/nullata/nullInvoice/blob/main/docs/extended/DEPLOYMENT.md#database-setup" Type="Variable" Display="always" Required="true" Mask="false">nullinvoice</Config>
+  <Config Name="DB_PASSWORD" Target="DB_PASSWORD" Default="changeme" Mode="" Description="Your MariaDB/MySQL database user password." Type="Variable" Display="always" Required="true" Mask="false">changeme</Config>
+  <Config Name="DB_NAME" Target="DB_NAME" Default="nullinvoice" Mode="" Description="Your MariaDB/MySQL database name. For more info on the requirements, please visit: https://github.com/nullata/nullInvoice/blob/main/docs/extended/DEPLOYMENT.md#database-setup" Type="Variable" Display="always" Required="true" Mask="false">nullinvoice</Config>
+  <Config Name="DB_PARAMS" Target="DB_PARAMS" Default="?useSSL=false&amp;amp;allowPublicKeyRetrieval=true&amp;amp;serverTimezone=Europe/Sofia" Mode="" Description="Additional database connection string parameters. &#13;&#10;Make sure to set a value for serverTimezone matching your TZ variable setting." Type="Variable" Display="always" Required="true" Mask="false">?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Sofia</Config>
+  <TailscaleStateDir/>
+</Container>
