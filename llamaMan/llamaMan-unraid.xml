@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>llamaMan</Name>
+  <Repository>nullata/llamaman</Repository>
+  <Registry>https://hub.docker.com/r/nullata/llamaman</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/nullata/llamaMan/issues</Support>
+  <Project>https://github.com/nullata/llamaMan</Project>
+  <ReadMe>https://raw.githubusercontent.com/nullata/llamaMan/refs/heads/main/README.md</ReadMe>
+  <Overview>A browser-based UI for launching, monitoring, and managing multiple llama.cpp server instances. Spawns llama-server as sibling Docker containers using official llama.cpp images. Includes an Ollama-compatible API proxy for use with Open WebUI.&#13;
+&#13;
+Universal GPU support for NVIDIA, AMD (ROCm), Intel Arc, and CPU. Auto-detects GPU vendor at startup. Optional multi-node clustering with shared database.&#13;
+&#13;
+For full documentation, please visit: https://github.com/nullata/llamaman/</Overview>
+  <Category>Tools: Other: Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:5000]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/nullata/llamaMan/refs/heads/main/static/images/logo.svg</Icon>
+  <ExtraParams>--publish 8000-8020:9000-9020</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1771289923</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Management UI Port" Target="5000" Default="5000" Mode="tcp" Description="Port for the llamaMan management web UI" Type="Port" Display="always" Required="true" Mask="false">5000</Config>
+  <Config Name="Proxy Port" Target="42069" Default="42069" Mode="tcp" Description="Ollama-compatible API proxy port (for OpenWebUI integration)" Type="Port" Display="always" Required="true" Mask="false">42069</Config>
+  <Config Name="Models" Target="/models" Default="/mnt/user/appdata/llamaman/models" Mode="" Description="Directory containing GGUF model files" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/llamaman/models</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/llamaman/data" Mode="" Description="Persistent data directory (state, presets, users, settings)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/llamaman/data</Config>
+  <Config Name="Logs" Target="/tmp/llama-logs" Default="/mnt/user/appdata/llamaman/logs" Mode="" Description="Directory for instance and download logs" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/llamaman/logs</Config>
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="" Description="Docker socket — required for llamaMan to spawn llama-server containers" Type="Path" Display="advanced" Required="true" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="GPU Sysfs (AMD/Intel)" Target="/sys/class/drm" Default="/sys/class/drm" Mode="ro" Description="GPU monitoring via sysfs (AMD + Intel Arc). Safe on NVIDIA hosts — ignored when pynvml is available." Type="Path" Display="advanced" Required="false" Mask="false">/sys/class/drm</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Sofia" Mode="" Description="Timezone. List of available TZs: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">Europe/Sofia</Config>
+  <Config Name="LLAMAMAN_NODE_NAME" Target="LLAMAMAN_NODE_NAME" Default="srv1" Mode="" Description="**Required.** Unique, stable identity for this deployment. It is the partition key for instances, downloads, and per-node settings. Pick once and keep it — changing it later orphans stored state." Type="Variable" Display="always" Required="true" Mask="false">srv1</Config>
+  <Config Name="HOST_MODELS_DIR" Target="HOST_MODELS_DIR" Default="/mnt/user/appdata/llamaman/models" Mode="" Description="Real host path to the models directory. llamaMan passes this to the Docker daemon when spawning sibling containers, so it must resolve on the host. **Must match the host path of the Models mount above** — if you change one, change both." Type="Variable" Display="always" Required="true" Mask="false">/mnt/user/appdata/llamaman/models</Config>
+  <Config Name="HOST_LOGS_DIR" Target="HOST_LOGS_DIR" Default="/mnt/user/appdata/llamaman/logs" Mode="" Description="Real host path to the logs directory. Same requirement as HOST_MODELS_DIR — must resolve on the Docker host. **Must match the host path of the Logs mount above.**" Type="Variable" Display="always" Required="true" Mask="false">/mnt/user/appdata/llamaman/logs</Config>
+  <Config Name="LLAMAMAN_MAX_MODELS" Target="LLAMAMAN_MAX_MODELS" Default="1" Mode="" Description="Maximum number of chat models the proxy keeps loaded simultaneously. 0 = disabled (no eviction, launches on demand)." Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="LLAMAMAN_PROXY_PORT" Target="LLAMAMAN_PROXY_PORT" Default="42069" Mode="" Description="Internal proxy port (must match the Proxy Port config above)" Type="Variable" Display="advanced" Required="false" Mask="false">42069</Config>
+  <Config Name="LLAMAMAN_IDLE_TIMEOUT" Target="LLAMAMAN_IDLE_TIMEOUT" Default="0" Mode="" Description="Minutes of inactivity before proxy-managed instances are stopped. 0 = disabled." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="HEALTH_CHECK_TIMEOUT" Target="HEALTH_CHECK_TIMEOUT" Default="3" Mode="" Description="Seconds to wait for a llama-server container health check before timing out" Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
+  <Config Name="MODEL_LOAD_TIMEOUT" Target="MODEL_LOAD_TIMEOUT" Default="300" Mode="" Description="Seconds to wait for a model to fully load before timing out" Type="Variable" Display="advanced" Required="false" Mask="false">300</Config>
+  <Config Name="REQUEST_TIMEOUT" Target="REQUEST_TIMEOUT" Default="300" Mode="" Description="Seconds before a proxied inference request times out" Type="Variable" Display="advanced" Required="false" Mask="false">300</Config>
+  <Config Name="LLAMA_IMAGE" Target="LLAMA_IMAGE" Default="ghcr.io/ggml-org/llama.cpp:server-cuda" Mode="" Description="llama.cpp server image for spawned containers. Auto-detected from GPU vendor if unset.&#13;&#10;NVIDIA: ghcr.io/ggml-org/llama.cpp:server-cuda&#13;&#10;AMD ROCm: ghcr.io/ggml-org/llama.cpp:server-rocm&#13;&#10;Intel Arc: ghcr.io/ggml-org/llama.cpp:server-sycl&#13;&#10;CPU: ghcr.io/ggml-org/llama.cpp:server" Type="Variable" Display="always" Required="false" Mask="false">ghcr.io/ggml-org/llama.cpp:server-cuda</Config>
+  <Config Name="LLAMA_NETWORK" Target="LLAMA_NETWORK" Default="llamaman-net" Mode="" Description="Docker network used by llamaMan and spawned containers" Type="Variable" Display="advanced" Required="false" Mask="false">llamaman-net</Config>
+  <Config Name="LLAMA_CONTAINER_PREFIX" Target="LLAMA_CONTAINER_PREFIX" Default="llamaman-" Mode="" Description="Prefix for spawned llama-server container names" Type="Variable" Display="advanced" Required="false" Mask="false">llamaman-</Config>
+  <Config Name="GPU_TYPE" Target="GPU_TYPE" Default="" Mode="" Description="Override GPU auto-detection. Values: cuda, rocm, intel. Leave blank to auto-detect." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="LLAMA_GPU_DEVICES" Target="LLAMA_GPU_DEVICES" Default="" Mode="" Description="Comma-separated GPU indices visible to all llama-server containers (e.g. 0,1,3). Leave blank to expose all GPUs." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="" Mode="" Description="NVIDIA hosts only — set to 'all' (or a specific GPU UUID) to give the llamaMan container native VRAM monitoring (pynvml). Also requires '--runtime=nvidia' in Extra Parameters and NVIDIA_DRIVER_CAPABILITIES below, plus the Unraid Nvidia-Driver plugin. Leave blank on AMD/Intel/CPU hosts — GPU stats then fall back to nvidia-smi/rocm-smi inside a running instance." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="" Mode="" Description="NVIDIA hosts only — set to 'utility' for native VRAM monitoring. Pairs with NVIDIA_VISIBLE_DEVICES and '--runtime=nvidia' in Extra Parameters. Leave blank on AMD/Intel/CPU hosts." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="DATABASE_URL" Target="DATABASE_URL" Default="" Mode="" Description="Optional MariaDB/MySQL connection string for database backend. Example: mysql+pymysql://llamaman:password@host:3306/llamaman. Leave blank for JSON file storage (default)." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="SECRET_KEY" Target="SECRET_KEY" Default="" Mode="" Description="Flask session secret. Required for multi-replica deployments. Leave blank for auto-generated per restart." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="CLUSTER_ENABLED" Target="CLUSTER_ENABLED" Default="" Mode="" Description="Enable multi-node clustering. Set to true when running multiple llamaMan deployments as one cluster. Requires shared DATABASE_URL and CLUSTER_SECRET." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="CLUSTER_SECRET" Target="CLUSTER_SECRET" Default="" Mode="" Description="Shared bearer token for node-to-node HTTP calls. Must be identical on every cluster node." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="CLUSTER_ADVERTISE_URL" Target="CLUSTER_ADVERTISE_URL" Default="" Mode="" Description="How peers reach this node (e.g. http://srv1:5000). A hostname/IP routable from other cluster hosts." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <TailscaleStateDir/>
+</Container>
