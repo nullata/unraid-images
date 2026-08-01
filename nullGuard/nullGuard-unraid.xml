@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>nullGuard</Name>
+  <Repository>nullata/nullguard</Repository>
+  <Registry>https://hub.docker.com/r/nullata/nullguard</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/nullata/nullGuard</Project>
+  <ReadMe/>
+  <Overview>WireGuard VPN management application for creating and managing VPN servers and clients.&#13;
+&#13;
+For the full documentation of this project, please visit: https://github.com/nullata/nullGuard/</Overview>
+  <Category>NetworkTools: Other: Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/nullata/nullGuard/refs/heads/main/static/images/logo.png</Icon>
+  <ExtraParams>--cap-add=NET_ADMIN --sysctl net.ipv4.ip_forward=1</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1785504577</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="WireGuard UDP Port" Target="51820" Default="51820" Mode="udp" Description="WireGuard server UDP port. Add additional UDP port mappings for each extra WireGuard server instance." Type="Port" Display="always" Required="true" Mask="false">51820</Config>
+  <Config Name="SERVER_PORT" Target="SERVER_PORT" Default="8080" Mode="" Description="Container-side port the web UI listens on. Must match the WebUI Port Target value above." Type="Variable" Display="advanced" Required="false" Mask="false">8080</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Sofia" Mode="" Description="Your UTC TZ offset. List of available TZs: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">Europe/Sofia</Config>
+  <Config Name="DB_HOST" Target="DB_HOST" Default="changeme" Mode="" Description="Your MariaDB/MySQL database host or container name" Type="Variable" Display="always" Required="true" Mask="false">changeme</Config>
+  <Config Name="DB_PORT" Target="DB_PORT" Default="3306" Mode="" Description="MariaDB/MySQL database port" Type="Variable" Display="always" Required="true" Mask="false">3306</Config>
+  <Config Name="DB_USER" Target="DB_USER" Default="nullguard" Mode="" Description="The designated user for this application in the database. For more info on the requirements, please visit: https://github.com/nullata/nullGuard/blob/main/README.md#database-setup" Type="Variable" Display="always" Required="true" Mask="false">nullguard</Config>
+  <Config Name="DB_PASS" Target="DB_PASS" Default="changeme" Mode="" Description="Your MariaDB/MySQL database user password." Type="Variable" Display="always" Required="true" Mask="true">changeme</Config>
+  <Config Name="DB_NAME" Target="DB_NAME" Default="nullguard" Mode="" Description="Your MariaDB/MySQL database name. For more info on the requirements, please visit: https://github.com/nullata/nullGuard/blob/main/README.md#database-setup" Type="Variable" Display="always" Required="true" Mask="false">nullguard</Config>
+  <Config Name="DB_TYPE" Target="DB_TYPE" Default="mysql" Mode="" Description="Database backend: mysql (default) or sqlite. To use sqlite: set this to 'sqlite', then manually add a Path mapping (e.g. /mnt/user/appdata/nullguard/data) to /data inside the container so the database file persists across updates." Type="Variable" Display="advanced" Required="false" Mask="false">mysql</Config>
+  <Config Name="SERVER_SSL_ENABLED" Target="SERVER_SSL_ENABLED" Default="false" Mode="" Description="Enable SSL for the web UI. Default: false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="SESSION_SECRET_KEY" Target="SESSION_SECRET_KEY" Default="" Mode="" Description="Secret key for session encryption. Auto-generated if not set, but highly recommended to set a random value to prevent all users being logged out on container update." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="SESSION_MAX_AGE" Target="SESSION_MAX_AGE" Default="3600" Mode="" Description="Maximum session age in seconds. Default: 3600." Type="Variable" Display="advanced" Required="false" Mask="false">3600</Config>
+  <Config Name="COOKIE_SECURE" Target="COOKIE_SECURE" Default="false" Mode="" Description="Set secure flag on cookies. Enable when using SSL. Default: false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="ENV" Target="ENV" Default="production" Mode="" Description="Environment mode. Set to production for secure session cookies. Default: production." Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
+  <Config Name="WG_SERVER_DEFAULT_NAME" Target="WG_SERVER_DEFAULT_NAME" Default="wg0" Mode="" Description="Default interface name for new WireGuard servers." Type="Variable" Display="advanced" Required="false" Mask="false">wg0</Config>
+  <Config Name="WG_SERVER_DEFAULT_COMMENT" Target="WG_SERVER_DEFAULT_COMMENT" Default="nullguard" Mode="" Description="Default comment for new WireGuard servers." Type="Variable" Display="advanced" Required="false" Mask="false">nullguard</Config>
+  <Config Name="WG_SERVER_DEFAULT_ADDR" Target="WG_SERVER_DEFAULT_ADDR" Default="10.252.0.1/24" Mode="" Description="Default address in CIDR notation for new WireGuard servers." Type="Variable" Display="advanced" Required="false" Mask="false">10.252.0.1/24</Config>
+  <Config Name="WG_SERVER_DEFAULT_PORT" Target="WG_SERVER_DEFAULT_PORT" Default="51820" Mode="" Description="Default WireGuard listen port for new servers." Type="Variable" Display="advanced" Required="false" Mask="false">51820</Config>
+  <Config Name="WG_SERVER_DEFAULT_SUPERNET" Target="WG_SERVER_DEFAULT_SUPERNET" Default="128.0.0.0/1, 0.0.0.0/1" Mode="" Description="Default supernet CIDRs for new servers." Type="Variable" Display="advanced" Required="false" Mask="false">128.0.0.0/1, 0.0.0.0/1</Config>
+  <Config Name="WG_SERVER_DEFAULT_KEEPALIVE" Target="WG_SERVER_DEFAULT_KEEPALIVE" Default="30" Mode="" Description="Default client keepalive in seconds (0-600) for new servers." Type="Variable" Display="advanced" Required="false" Mask="false">30</Config>
+  <Config Name="WG_SERVER_DEFAULT_CONF_PATH" Target="WG_SERVER_DEFAULT_CONF_PATH" Default="/etc/wireguard" Mode="" Description="Default config file path for new WireGuard servers." Type="Variable" Display="advanced" Required="false" Mask="false">/etc/wireguard</Config>
+  <Config Name="WG_SERVER_CONF_PATH" Target="WG_SERVER_CONF_PATH" Default="/etc/wireguard" Mode="" Description="Path inside the container where WireGuard server configs are generated. Not mandatory to persist via volume - server configurations are stored in the database and regenerated from there on startup." Type="Variable" Display="advanced" Required="false" Mask="false">/etc/wireguard</Config>
+  <Config Name="WG_CLIENT_DEFAULT_NAME" Target="WG_CLIENT_DEFAULT_NAME" Default="my-wg-client" Mode="" Description="Default name for new WireGuard clients." Type="Variable" Display="advanced" Required="false" Mask="false">my-wg-client</Config>
+  <Config Name="AUTO_START_SERVERS" Target="AUTO_START_SERVERS" Default="false" Mode="" Description="Automatically start all WireGuard servers on application startup. Default: false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <TailscaleStateDir/>
+</Container>
