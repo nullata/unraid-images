@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>webui-manager</Name>
+  <Repository>nullata/webuimanager</Repository>
+  <Registry>https://hub.docker.com/r/nullata/webui-manager</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/nullata/webui-manager</Project>
+  <ReadMe/>
+  <Overview>A self-hosted Flask app for organizing and launching your internal web services. Stores service URLs grouped by host with optional credentials, category tags, and auto-discovered favicons.</Overview>
+  <Category>Tools: Other: Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:5000]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/nullata/webui-manager/refs/heads/main/docs/webuimanager-logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>0</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Port" Target="5000" Default="5000" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">5000</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Sofia" Mode="" Description="Your UTC TZ offset for database timestamp recording. List of available TZs: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="true" Mask="false">Europe/Sofia</Config>
+  <Config Name="DB_HOST" Target="DB_HOST" Default="changeme" Mode="" Description="Your MariaDB/MySQL database host or container name" Type="Variable" Display="always" Required="true" Mask="false">changeme</Config>
+  <Config Name="DB_PORT" Target="DB_PORT" Default="3306" Mode="" Description="MariaDB/MySQL database port" Type="Variable" Display="always" Required="true" Mask="false">3306</Config>
+  <Config Name="DB_USER" Target="DB_USER" Default="webui" Mode="" Description="The designated user for this application in the database. For more info on the requirements, please visit: https://github.com/nullata/webui-manager/blob/main/README.md#database-setup" Type="Variable" Display="always" Required="true" Mask="false">webui</Config>
+  <Config Name="DB_PASS" Target="DB_PASS" Default="changeme" Mode="" Description="Your MariaDB/MySQL database user password." Type="Variable" Display="always" Required="true" Mask="true">changeme</Config>
+  <Config Name="DB_NAME" Target="DB_NAME" Default="webui_manager" Mode="" Description="Your MariaDB/MySQL database name. For more info on the requirements, please visit: https://github.com/nullata/webui-manager/blob/main/README.md#database-setup" Type="Variable" Display="always" Required="true" Mask="false">webui_manager</Config>
+  <Config Name="DB_PARAMS" Target="DB_PARAMS" Default="?charset=utf8mb4" Mode="" Description="Additional database connection string parameters. Make sure to set a value for charset matching your database. Default: ?charset=utf8mb4" Type="Variable" Display="always" Required="true" Mask="false">?charset=utf8mb4</Config>
+  <Config Name="SECRET_KEY" Target="SECRET_KEY" Default="" Mode="" Description="Flask session secret. Required for multi-replica deployments. Leave blank for auto-generated per restart." Type="Variable" Display="always" Required="false" Mask="false">auto</Config>
+  <Config Name="APP_CREDENTIALS_KEY" Target="APP_CREDENTIALS_KEY" Default="" Mode="" Description="Key used to encrypt stored credentials at rest. Leave blank for auto-generated per restart." Type="Variable" Display="always" Required="false" Mask="false">auto</Config>
+  <Config Name="SESSION_COOKIE_NAME" Target="SESSION_COOKIE_NAME" Default="webui_manager_session" Mode="" Description="Name of the session cookie. Only change this if you run several copies of WebUI Manager on the same hostname and want each to keep its own login. Default: webui_manager_session" Type="Variable" Display="advanced" Required="false" Mask="false">webui_manager_session</Config>
+  <Config Name="AUTO_MIGRATE" Target="AUTO_MIGRATE" Default="true" Mode="" Description="Run automatic schema migration on startup. Default: true" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <TailscaleStateDir/>
+</Container>
